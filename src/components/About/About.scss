@@ -1,0 +1,205 @@
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+$primary: #fed136 !default;
+
+// Styling for the timeline section
+.timeline {
+  //Định vị trí tuyệt đối (vị trí bao ngoài), lúc này các thẻ HTML bên trong sẽ coi nó là thẻ cha
+  //Dùng để thiết lập một phần tử sử dụng các thuộc tính position (xem ở dưới) mà không làm ảnh hưởng đến việc hiển thị ban đầu.
+  position: relative;
+
+  padding: 0;
+  list-style: none; //Không hiển thị image list, đây là dạng mặc định.
+
+  &:before {
+    //Before dùng để thêm nội dung vào đằng trước thẻ HTML.
+    // Dùng để thiết lập vị trí của một phần tử nhưng nó sẽ luôn nằm trong một phần tử mẹ đang là relative.
+    position: absolute; //Định vị trí tuyệt đối cho thành phần theo thành phần bao ngoài (thành phần định vị trí tương đối position: relative;) hoặc theo cửa sổ trình duyệt.
+    top: 0; // Căn vị trí hiển thị của phần tử theo hướng từ trên xuống dưới. Giá trị càng cao thì phần tử càng thụt xuống dưới.
+    bottom: 0; //Căn vị trí hiển thị của phần tử theo hướng từ dưới lên trên. Giá trị càng cao thì phần tử càng hiển thị lên cao.
+    left: 40px; //Căn vị trí hiển thị từ trái sang phải. Giá trị càng cao thì phần tử sẽ càng thụt về bên phải.
+    width: 2px;
+    margin-left: -1.5px;
+    content: "";
+    background-color: $gray-200;
+  }
+
+  > li {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 50px;
+    &:after,
+    &:before {
+      display: table;
+      content: "";
+    }
+    &:after {
+      clear: both;
+    }
+    .timeline-image {
+      position: absolute;
+      z-index: 100;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      margin-left: 0;
+      text-align: center;
+      color: white;
+      border: 5px solid $gray-200;
+      border-radius: 100%;
+      background-color: $primary;
+      h4 {
+        font-size: 10px;
+        line-height: 14px;
+        margin-top: 12px;
+      }
+    }
+    .timeline-panel { //panel in left
+      position: relative;
+      float: right; //Nằm phía bên phải
+      width: 100%;
+      padding: 0 20px 0 100px; //Cách ảnh 100px, lề 20px
+      text-align: left;
+      &:before {
+        right: auto;
+        left: -15px;
+        border-right-width: 15px;
+        border-left-width: 0;
+      }
+      &:after {
+        right: auto;
+        left: -14px;
+        border-right-width: 14px;
+        border-left-width: 0;
+      }
+    }
+
+    &.timeline-inverted > .timeline-panel {
+      float: right;
+      padding: 0 20px 0 100px;
+      text-align: left;
+      &:before {
+        right: auto;
+        left: -15px;
+        border-right-width: 15px;
+        border-left-width: 0;
+      }
+      &:after {
+        right: auto;
+        left: -14px;
+        border-right-width: 14px;
+        border-left-width: 0;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .timeline-heading {
+    h4 {
+      margin-top: 0;
+      color: inherit;
+      &.subheading {
+        text-transform: none; //Trả văn bản về dạng mặc định ban đầu
+      }
+    }
+  }
+  .timeline-body {
+    > ul,
+    > p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .timeline {
+    &:before {
+      left: 50%;
+    }
+
+    > li {
+      min-height: 100px;
+      margin-bottom: 50px;
+      .timeline-panel {
+        float: left; //
+        width: 43%;
+        padding: 0 10px 10px 20px; //top | right | bottom | left
+        text-align: right;
+      }
+      .timeline-image {
+        left: 50%; //Căn hình vào giữa
+        width: 100px;
+        height: 100px;
+        margin-left: -50px; //Dịch 1 nửa width 
+        h4 {
+          font-size: 13px;
+          line-height: 18px;
+          margin-top: 16px;
+        }
+      }
+      &.timeline-inverted > .timeline-panel {
+        float: right;
+        padding: 0 30px 20px 20px;
+        text-align: left;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .timeline {
+    > li {
+      min-height: 150px;
+      .timeline-panel {
+        padding: 0 20px 20px;
+      }
+      .timeline-image {
+        width: 150px;
+        height: 150px;
+        margin-left: -75px;
+        h4 {
+          font-size: 18px;
+          line-height: 26px;
+          margin-top: 30px;
+        }
+      }
+      &.timeline-inverted > .timeline-panel {
+        padding: 0 20px 20px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .timeline {
+    > li {
+      min-height: 170px;
+      .timeline-panel {
+        padding: 0 20px 20px 100px;
+      }
+      .timeline-image {
+        width: 170px;
+        height: 170px;
+        margin-left: -85px;
+        h4 {
+          margin-top: 40px;
+        }
+      }
+      &.timeline-inverted > .timeline-panel {
+        padding: 0 100px 20px 20px;
+      }
+    }
+  }
+}
